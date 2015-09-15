@@ -20,7 +20,7 @@ function print (){
 					"<p>I'm currently at: ", lat, " ", lng, "</p>"
 				].join("")				
 				console.log(html)
-				$("body").append(html)
+				setInterval(function(){$("body").append(html)},2000);
 
 			}
 			printLocation(station_is_at)
@@ -34,10 +34,7 @@ function print (){
 
 
 
-setInterval(function(){
-	print()
-	$("p").html("")
-	}, 2000);
+print()
 
 
 
