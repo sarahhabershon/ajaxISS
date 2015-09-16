@@ -1,14 +1,15 @@
 var stationLocation = "http://api.open-notify.org/iss-now.json"
 var station_is_at
+var map;
 
 function successFunction(data) {
-			console.log ("data: ", data)
-			station_is_at = data.iss_position
-			console.log(station_is_at)
-			var latlng = coord(station_is_at)
-			var toAppend = htmlMaker(latlng)
-			printToPage(toAppend)
-			initialize(latlng)
+	console.log ("data: ", data)
+	station_is_at = data.iss_position
+	console.log(station_is_at)
+	var latlng = coord(station_is_at)
+	var toAppend = htmlMaker(latlng)
+	printToPage(toAppend)
+	eye(latlng)
 }
 
 function printToPage(html){
@@ -35,7 +36,7 @@ function ajaxcall(){
 
 setInterval(ajaxcall, 1000)
 
-var map;
+
 
 
 function initialize(input) {
@@ -45,8 +46,11 @@ function initialize(input) {
   };
   map = new google.maps.Map(document.getElementById('map'),
       mapOptions);
+}
 
-  var marker = new google.maps.Marker({
+ function eye(input){ 
+ 	
+ 	marker = new google.maps.Marker({
     // The below line is equivalent to writing:
     // position: new google.maps.LatLng(-34.397, 150.644)
     position: {lat: input[0], lng: input[1]},
