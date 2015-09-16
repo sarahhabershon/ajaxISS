@@ -8,6 +8,7 @@ function successFunction(data) {
 			var latlng = coord(station_is_at)
 			var toAppend = htmlMaker(latlng)
 			printToPage(toAppend)
+			initialize(latlng)
 }
 
 function printToPage(html){
@@ -32,5 +33,24 @@ function ajaxcall(){
 	"jsonp")
 }
 
-setInterval(ajaxcall, 2000)
+setInterval(ajaxcall, 1000)
+
+var map;
+
+
+function initialize(input) {
+  var mapOptions = {
+    zoom: 2,
+    center: {lat: 0, lng: 0}
+  };
+  map = new google.maps.Map(document.getElementById('map'),
+      mapOptions);
+
+  var marker = new google.maps.Marker({
+    // The below line is equivalent to writing:
+    // position: new google.maps.LatLng(-34.397, 150.644)
+    position: {lat: input[0], lng: input[1]},
+    map: map
+  });
+}
 
